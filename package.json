@@ -1,0 +1,12 @@
+{
+  "name": "virtue-dao",
+  "version": "0.0.1",
+  "description": "A DAO with no proposals, virtuous swarms on a mission with continuous EnDAOment funding",
+  "main": "index.js",
+  "repository": "git@github.com:aquabu/virtue-dao.git",
+  "author": "Noah Thorp <noah@comakery.com>",
+  "license": "MIT",
+  "scripts": {
+    "publish-site": "git subtree push --prefix gh-pages origin gh-pages"
+  }
+}
