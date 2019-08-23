@@ -1,16 +1,28 @@
-# Virtue DAO
+# Virtue DAO with EnDAOment
 
-## Why Virtuous Swarms With No Proposals
+## The Problem With DAO Proposals
 
 Decentralized Autonomous Organizations (DAOs) help us fulfill a common purpose, allocate resources and coordinate activities.
 
-**But** proposals take a long time to write, read and vote on. Voter turnout is often very low. Waiting for permission for proposals is not fast enough in fast moving scenarios or exploding complexity with lots of localized expertise. Proposals are not in the spirit of permissionless action and do-ocracy. 
+**But** proposals take a long time to write, read and vote on. Voter turnout is often very low. Waiting for permission for proposals is not fast enough in fast moving scenarios or in large communities with lots of localized expertise and decisions. Proposals are not in the spirit of permissionless action and do-ocracy. 
 
-## How It Could Work 
+## Virtuous Swarms With No Proposals
 
 As a metaphor, consider a monastic order where individuals gain access to the resources of the order based on their adherence to following the precepts of their order - through their virtue. If the people of the order (monks, knights, artists, activists) remain true to the precepts others who are inspired by their actions and way of acting donate to the endowment.
 
-Here's the rough starting point for the implementation:
+Here are some example virtues, drawn from Agile Software Development, the Open Source ethos, Buddhist precepts and the code of chivalry: 
+* Writes open source DAO governance code that is useful to the community
+* Acts to support the welfare of other DAO members
+* Abstains from false speech
+* Perseveres to the end in any enterprise begun
+
+To get more utilitarian, many organizations have a mission, stated values and KPIs. These can be translated into "virtues".
+
+## How It Works
+
+![](diagrams/virtue-dao/virtue-dao.png)
+
+## Initial Idea Bucket
 
 * Resource allocation without proposals 
 * Funds allocated and made available proportionate to how much a person embodies the virtues that the DAO values
@@ -21,14 +33,14 @@ Here's the rough starting point for the implementation:
 * A fair method of sourcing virtue from DAO members or a third party like Kleros
 * We will probably build on existing DAO codebase like *DAOStack*
 
-## Who We Need On The Team
-
-* UI/UX Designers - design matters for communicating this idea.
-* Developers - Solidity, Javascript.
-* Advisors who are interested in the approach or have knowledge about foundations, endowments, and community organization. Pleae join us to help develop the use cases.
-
 ## Communication
 
-* Tell me you are interested by responding to this Github task
-* Message me on Telegram @noahthorp
-* We will setup team chat once the team starts to form (probably telegram)
+Message the core maintainer Noah on Telegram @noahthorp or open an GitHub issue.
+
+## Thanks!
+
+Thanks to:
+* Noah Thorp for initial idea and code
+* Megan Knab @ Veriledger for coming up with the word EnDAOment
+* PeterPan from MetaCartel for the encouragement
+* Harlan Wood for the ongoing dialog about Trust Graph
