@@ -7,7 +7,7 @@ contract VirtueDAO {
     mapping(address => mapping(uint => uint)) public allyVirtues; // allyAddress => virtueId => balance
     mapping(uint => mapping(address => uint)) public awardsMadeThisPeriod; // periodId => user => awardsMadeThisPeriod
     
-    // token awards
+    // point awards
     uint public maxVirtueId = 5;
     uint public maxAwardablePerPeriod = 100;
     uint public currentPeriod = 0;
@@ -45,7 +45,7 @@ contract VirtueDAO {
     //     _calculateFellowship(msg.sender);
     // }
 
-    // // based on virtue tokens received, max values,
+    // // based on virtue points received, max values,
     // // decay of virtue since it was awarded 
     // // endowment available during this period
     // function _calculateFellowship(address _ally) private {

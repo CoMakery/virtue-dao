@@ -4,7 +4,7 @@
 
 The Virtue DAO is a new kind of decentralized autonomous organization that incentivizes virtuous swarm of autonomous agents aligned with the DAOs mission. Allies receive continuous EnDAOment funding based on their virtue. It's a Decentralized Autonomous Organization (DAO) with no proposals!
 
-## STATUS: PROOF OF CONCEPT
+## STATUS: HACKATHON PROOF OF CONCEPT
 
 Not suitable for funds you do not want to loose yet. Development and security audits needed.
 
@@ -16,7 +16,7 @@ Not suitable for funds you do not want to loose yet. Development and security au
 * [Maker DAO, DAI](https://makerdao.com/en/dai/) stable coin backed by ETH but algorithmically pegged to USD value
 * [Compound.finance](https://compound.finance) integration to allocate interest from the endowment fund 
 * [rDAI](https://redeem.money) tokens wrap the Compound.finance cDAI for more flexible use
-* Although Virtue DAOs stand on their own currently, they are complimentary to proposal based smart contract frameworks like DAOstack and Aragon
+* Although Virtue DAOs stand on their own currently, they are complimentary to proposal based smart contract frameworks like [DAOstack](https://daostack.io) and [Aragon](https://aragon.org)
 
 # Overview
 
@@ -47,20 +47,20 @@ In addition the Virtue DAO can take direct grants of DAI to be disbursed to alli
 
 # Virtue DAO Use Cases 
 
-## Ally Recognizes Another Ally's Virtue by Awarding Them Virtue Tokens 
+## Ally Recognizes Another Ally's Virtue by Awarding Them Virtue Points 
 
-1. A initial ally or person with virtue receives virtue tokens over time to award to other allies
-2. They award the tokens to other allies who's virtue they recognize 
+1. A initial ally or person with virtue receives virtue points over time to award to other allies
+2. They award the points to other allies who's virtue they recognize 
 
 ![](assets/virtue-dao/award-virtue.png)
 
 ## Ally Claims Fellowship 
 
 1. A person with a blockchain address embodies the virtues of the Virtue DAO
-2. Someone at Virtue DAO sends them Virtue Tokens for their virtues and makes them a ally
+2. Someone at Virtue DAO sends them Virtue Points for their virtues and makes them a ally
 3. The ally claims their DAI based on the amount of virtue they have been recognized with
-4. Time passes and their past Virtue Tokens decay
-5. They receive new Virtue Tokens
+4. Time passes and their past Virtue Points decay
+5. They receive new Virtue Points
 6. They claim their DAI based on the amount of virtue they have been recognized with
 
 ![](assets/virtue-dao/ally-funding.png)
@@ -87,7 +87,7 @@ In addition the Virtue DAO can take direct grants of DAI to be disbursed to alli
 ## The Virtue DAO Deployer Configures the Virtue DAO
 
 1. The Virtue DAO deployer configures the projects mission and virtues
-2. Configures the initialAlly blockchain addresses and the number of virtue tokens they receive
+2. Configures the initialAlly blockchain addresses and the number of virtue points they receive
 3. Deploys the virtue DAO contract
 
 # Ally Virtue Calculations
@@ -112,23 +112,23 @@ For the current period each ally can withdraw:
 fellowship(user) = (virtue(user) / totalVirtue) * currentTotalFellowship 
 ```
 
-## Awardable Virtue Tokens Calculation
+## Awardable Virtue Points Calculation
 
-Each period, each ally of the Virtue DAO receives an allocation of virtue tokens. They can award these generic virtue tokens to any person for a specific virtue established by the DAO.
+Each period, each ally of the Virtue DAO receives an allocation of virtue points. They can award these generic virtue points to any person for a specific virtue established by the DAO.
 
 When the DAO is deployed there is an `awardableByInitialAllyAmount`. This is given to initial allies each period to make sure there are always some people who can continue to recognize virtue for the DAO. This amount should be less than the awardable amounts people control in an active Virtue DAO.
 
-Each users allocation of tokens for the given period is
+Each users allocation of points for the given period is
 ```
 baseAmount( user ) = if( user is an initial ally) then awardableByInitalAllyAmount else 0
 
-virtueTokenallocationThisPeriod(user) = 
+virtuePointallocationThisPeriod(user) = 
 baseAmount + ( (virtue(user) / maxVirtue) * maxAllocation )
 ```
 
 # FAQs
 
-**Why bother having a virtue token? Why not issued a stable coin directly?**
+**Why bother having a virtue point? Why not issued a stable coin directly?**
 
 The intent of the Virtue DAO is to continuously fund virtuous people achieving a mission. Virtue points are used to calculate the proportion of funds to allocate to each ally and to control how virtue decays over time.
 
@@ -142,7 +142,7 @@ No. Virtue decays gradually over time. You must keep being virtuous and aligned 
 
 **How is Virtue initially distributed? What if no one has remaining virtue?**
 
-The initial agents can distribute some amount of virtue in every period, regardless of their current level of virtue. There may be a better solution to this, but we need to avoid locking funds because everyones virtue has decayed and no one should receive any tokens.
+The initial agents can distribute some amount of virtue in every period, regardless of their current level of virtue. There may be a better solution to this, but we need to avoid locking funds because everyones virtue has decayed and no one should receive any points.
 
 # Thanks!
 
