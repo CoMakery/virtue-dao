@@ -42,5 +42,5 @@ Message the core maintainer Noah on Telegram @noahthorp or open an GitHub issue.
 Thanks to:
 * Noah Thorp for initial idea and code
 * Megan Knab @ Veriledger for coming up with the word EnDAOment
-* PeterPan from MetaCartel for the encouragement
+* Pet3rPan from MetaCartel for the encouragement
 * Harlan Wood for the ongoing dialog about Trust Graph

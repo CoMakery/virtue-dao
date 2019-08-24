@@ -25,7 +25,6 @@ contract VirtueCoin {
     function recognizeVirtue(address _member, bytes32 virtueType, uint amount) public {
         // stub
     }
-    
 
     // Virtue -> rDAI: transferFrom(daoAddress, daoMemberAddress, amount)
     // Member1 -> DAI: transfer(recipientAddress, amount) \n// DAI is member'
