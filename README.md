@@ -2,7 +2,11 @@
 
 # Virtue DAO EnDAOments
 
-The Virtue DAO incentivizes a virtuous swarm of autonomous people aligned with the DAOs mission. Members receive continuous EnDAOment funding based on their virtue. It's a Decentralized Autonomous Organization (DAO) with no proposals! 
+The Virtue DAO incentivizes a virtuous swarm of autonomous people aligned with the DAOs mission. Members receive continuous EnDAOment funding based on their virtue. It's a Decentralized Autonomous Organization (DAO) with no proposals!
+
+## STATUS: PROOF OF CONCEPT
+
+Not suitable for funds you do not want to loose yet. Development and security audits needed.
 
 ## The Problem With DAO Proposals
 
