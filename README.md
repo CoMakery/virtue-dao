@@ -15,14 +15,14 @@ Not suitable for funds you do not want to loose yet. Development and security au
 * [MetaMask](https://metamask.io/) web wallet integration
 * [Maker DAO, DAI](https://makerdao.com/en/dai/) stable coin backed by ETH but algorithmically pegged to USD value
 * [Compound.finance](https://compound.finance) integration to allocate interest from the endowment fund 
-* [rDAI](https://redeem.money) token wrap the Compound.finance cDAI for more flexible use
-* Although Virtue DAO stand on their own currently, they are complimentary to proposal based smart contract frameworks like DAOstack and Aragon
+* [rDAI](https://redeem.money) tokens wrap the Compound.finance cDAI for more flexible use
+* Although Virtue DAOs stand on their own currently, they are complimentary to proposal based smart contract frameworks like DAOstack and Aragon
 
 ## The Problem With DAO Proposals
 
 Decentralized Autonomous Organizations (DAOs) help us fulfill a common purpose, allocate resources and coordinate activities.
 
-**But** proposals take a long time to write, read and vote on. Voter turnout is often very low. Waiting for permission for proposals is not fast enough in fast moving scenarios or in large communities with lots of localized expertise and decisions. Proposals are not in the spirit of permissionless action and do-ocracy. 
+**BUT** proposals take a long time to write, read and vote on. Voter turnout is often very low. Waiting for permission for proposals is not fast enough in fast moving scenarios or in large communities with lots of localized expertise and decisions. Although proposals have their place, they are not in the spirit of permissionless action and do-ocracy. 
 
 ## Virtuous Swarms of Agents With No Proposals
 
@@ -37,9 +37,13 @@ Here are some example "virtues" as we use them in the context of the Virtue DAO:
 * Perseveres to the end in any enterprise begun
 * Conscientiously uses funds granted from the Virtue DAO towards the DAOs mission
 
+## The EnDAOment
+
+To support the allies of the DAO, patrons can deposit funds using Compound.finance and rDAI. The underlying DAI stable coin is then lent out to borrowers. The interest from the loans is then used to fund the Virtue DAO allies on an ongoing basis. You can imagine this is similar to a credit union where the loan interest is dedicated to a social purpose.
+
 # Virtue DAO Use Cases 
 
-## Ally Recognizes Another Allies Virtue by Awarding Virtue Tokens 
+## Ally Recognizes Another Ally's Virtue by Awarding Them Virtue Tokens 
 
 1. A initial ally or person with virtue receives virtue tokens over time to award to other allies
 2. They award the tokens to other allies who's virtue they recognize 
@@ -60,8 +64,8 @@ Here are some example "virtues" as we use them in the context of the Virtue DAO:
 ## Patron Endows the DAO 
 
 1. Likes the mission of the Virtue DAO and wants to support virtuous people and their projects to work towards the goal of the DAO  
-2. Transfers funds in DAI to Compound to receive compound interest on loans
-3. Delegates the interest from their DAI deposit to the Virtue Token Contract address using rDAI
+2. Transfers funds in DAI to Compound.finance via rDAI to receive compound interest on loans
+3. Delegates the interest from their DAI deposit to the Virtue DAO Smart Contract address using rDAI
 4. When interest accrues it is allocated Virtuous allies through the Virtue DAO
 
 ![](assets/virtue-dao/patron-endowment.png)
@@ -83,6 +87,8 @@ Here are some example "virtues" as we use them in the context of the Virtue DAO:
 3. Deploys the virtue DAO contract
 
 # Ally Virtue Calculations
+
+## Virtue Decay Function
 
 Each user's virtue for the current period is calculated as:
 ```
@@ -120,7 +126,7 @@ baseAmount + ( (virtue(user) / maxVirtue) * maxAllocation )
 
 **Why bother having a virtue token? Why not issued a stable coin directly?**
 
-The intent of the Virtue DAO is to continuously fund virtuous people achieving a mission. To calculate the proportion of funds to allocate to each ally
+The intent of the Virtue DAO is to continuously fund virtuous people achieving a mission. Virtue points are used to calculate the proportion of funds to allocate to each ally and to control how virtue decays over time.
 
 **Do you apply for membership like other DAOs?**
 
