@@ -99,6 +99,24 @@ virtueTokenallocationThisPeriod(user) =
 baseAmount + ( (virtue(user) / maxVirtue) * maxAllocation )
 ```
 
+## FAQs
+
+**Why bother having a virtue token? Why not issued a stable coin directly?**
+
+The intent of the Virtue DAO is to continuously fund virtuous people achieving a mission. To calculate the proportion of funds to allocate to each member
+
+**Do you apply for membership like other DAOs?**
+
+No. If you have virtue you are considered an agent of the DAO and can claim a portion of the continuous distribution of funds. You also can award other people virtue.
+
+**Do you keep your virtue forever?**
+
+No. Virtue decays gradually over time. You must keep being virtuous and aligned to receive benefits.
+
+**How is Virtue initially distributed? What if no one has remaining virtue?**
+
+The initial agents can distribute some amount of virtue in every period, regardless of their current level of virtue. There may be a better solution to this, but we need to avoid locking funds because everyones virtue has decayed and no one should receive any tokens.
+
 ## Initial Idea Bucket
 
 * Resource allocation without proposals 
@@ -109,10 +127,6 @@ baseAmount + ( (virtue(user) / maxVirtue) * maxAllocation )
 * Monthly allocation of resources with the option to pool resources
 * A fair method of sourcing virtue from DAO members or a third party like Kleros
 * We will probably build on existing DAO codebase like *DAOStack*
-
-## Communication
-
-Message the core maintainer Noah on Telegram @noahthorp or open an GitHub issue.
 
 ## Thanks!
 
