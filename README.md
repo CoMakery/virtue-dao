@@ -1,4 +1,8 @@
-# Virtue DAO with EnDAOment
+![](assets/cat-seraphim.jpg)
+
+# Virtue DAO EnDAOments
+
+A Decentralized Autonomous Organization (DAO) with no proposals. The Virtue DAO creates a virtuous swarm aligned with the mission. Members receive continuous EnDAOment funding based on their virtue.
 
 ## The Problem With DAO Proposals
 
@@ -20,7 +24,7 @@ To get more utilitarian, many organizations have a mission, stated values and KP
 
 ## How It Works
 
-![](diagrams/virtue-dao/virtue-dao.png)
+![](assets/virtue-dao/virtue-dao.png)
 
 ## Initial Idea Bucket
 
@@ -43,4 +47,5 @@ Thanks to:
 * Noah Thorp for initial idea and code
 * Megan Knab @ Veriledger for coming up with the word EnDAOment
 * Pet3rPan from MetaCartel for the encouragement
+* Real Crypto Cats for the Virtue DAO cat meme - Instagram [@realcryptocats](https://www.instagram.com/realcryptocats/)
 * Harlan Wood for the ongoing dialog about Trust Graph
