@@ -128,9 +128,9 @@ baseAmount + ( (virtue(user) / maxVirtue) * maxAllocation )
 
 # FAQs
 
-**Why bother having a virtue point? Why not issued a stable coin directly?**
+**Why bother having a virtue points? Why not issued a stable coin directly?**
 
-The intent of the Virtue DAO is to continuously fund virtuous people achieving a mission. Virtue points are used to calculate the proportion of funds to allocate to each ally and to control how virtue decays over time.
+The intent of the Virtue DAO is to continuously fund virtuous people achieving a mission. Virtue points are used to calculate the proportion of funds to allocate to each ally and to control how virtue decays over time. The decay of virtue is important for maintaining continuity, adapting to the changing activity of allies, and the ongoing incentive to adhere to the virtues of the DAO.
 
 **Do you apply for membership like other DAOs?**
 

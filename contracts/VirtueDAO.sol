@@ -4,7 +4,7 @@ contract VirtueDAO {
     // TODO: add SafeMath back after sketch phase
     // using SafeMath for uint;
 
-    mapping(address => mapping(uint => uint)) public allyVirtues; // allyAddress => virtueId => balance
+    mapping(address => mapping(uint => uint)) public allyVirtues; // allyAddress => virtueId => pointBalance
     mapping(uint => mapping(address => uint)) public awardsMadeThisPeriod; // periodId => user => awardsMadeThisPeriod
     
     // point awards
