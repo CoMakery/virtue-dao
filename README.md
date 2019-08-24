@@ -1,4 +1,4 @@
-![](assets/cat-seraphim.jpg)
+![](assets/cat-seraphim-2.jpg)
 
 # Virtue DAO EnDAOments
 
@@ -118,3 +118,5 @@ Thanks to:
 * Pet3rPan from MetaCartel for the encouragement
 * Real Crypto Cats for the Virtue DAO cat meme - Instagram [@realcryptocats](https://www.instagram.com/realcryptocats/)
 * Harlan Wood for the ongoing dialog about Trust Graph
+
+![](assets/cat-seraphim.jpg)
