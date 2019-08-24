@@ -4,14 +4,22 @@ contract VirtueCoin {
     // TODO: add SafeMath back after sketch phase
     // using SafeMath for uint;
 
-    mapping(bytes32 => mapping(address => uint)) virtueBalances;
-    bytes32[] virtues; // constructor with initial members and virtues
+    mapping(uint => mapping(address => uint)) public virtueBalances; // virtuid => holderAddress => balance
+    struct PeriodValues {
+        
+    }
+    mapping(uint => mapping(address => PeriodValues)) public userPeriodValues;
+    // token awards
+    uint public maxVirtueId;
+    uint public maxAwardablePerPeriod = 100;
+    uint public currentPeriod = 0;
 
-    // Virtue -> Virtue: counstructor(foundingMembers, virtues) \n //initial members get virtue tokens of specific types to award
-
-    constructor() public {
-        virtues.push("gsd");
-        virtues.push("nice");
+    constructor(uint _numberOfVirtues) public {
+        if(_numberOfVirtues < 2) {
+            maxVirtueId = 1;
+        } else {
+            maxVirtueId = _numberOfVirtues - 1;
+        }
     }
     
     // returns total funds available from patrons 
@@ -19,16 +27,24 @@ contract VirtueCoin {
     //     // stub
     //     return 0;
     // }
-    function virtueCount() public returns (uint) {
-        return virtues.length;
+    
+    function virtueCount() public view returns (uint) {
+        return maxVirtueId + 1;
     }
-    function checkVirtue(address _member, bytes32 _virtueType) public returns (uint) {
+    
+    function checkVirtue(address _member, uint _virtueType) public view returns (uint) {
         //stub
         return 0;
     }
-    // function recognizeVirtueBalance(address _member, bytes32 _virtueType) public {
-    //     // stub
-    // }
+    
+    function awardableThisPeriod(address _member) public view returns (uint) {
+        return maxAwardablePerPeriod;
+    }
+    
+    function awardedThisPeriod(address _member) {
+        return maxAwardablePerPeriod;
+    }
+    
     // function recognizeVirtue(address _member, bytes32 virtueType, uint amount) public {
     //     // stub
     // }
