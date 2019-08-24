@@ -1,5 +1,5 @@
-const VirtueCoin = artifacts.require("VirtueCoin");
+const VirtueDAO = artifacts.require("VirtueDAO");
 
 module.exports = function(deployer) {
-  deployer.deploy(VirtueCoin);
+  deployer.deploy(VirtueDAO);
 };

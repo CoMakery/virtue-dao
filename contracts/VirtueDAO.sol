@@ -5,54 +5,46 @@ contract VirtueDAO {
     // using SafeMath for uint;
 
     // mapping(uint => mapping(address => uint)) public virtueBalances; // virtuid => holderAddress => balance
-    struct MemberVirtue {
-        uint[5] virtueBalances;
-        uint totalVirtue;
-    }
+    
+    // struct MemberVirtue {
+    //     uint[5] virtueBalances; // TODO: make this flexible
+    //     uint totalVirtue;
+    // }
 
-    mapping(address => MemberVirtue) public memberVirtues;
+    mapping(address => mapping(uint => uint)) public memberVirtues; // memberAddress => virtueType => balance
     mapping(uint => mapping(address => uint)) public awardsMadeThisPeriod; // periodId => user => awardsMadeThisPeriod
     
     // token awards
-    uint public maxVirtueId;
+    uint public maxVirtueId = 5;
     uint public maxAwardablePerPeriod = 100;
     uint public currentPeriod = 0;
-
-    constructor(uint _numberOfVirtues) public {
-        if(_numberOfVirtues < 2) {
-            maxVirtueId = 1;
-        } else {
-            maxVirtueId = _numberOfVirtues - 1;
-        }
-    }
     
     // returns total funds available from patrons 
     // function endowmentBalance() public returns(uint) {
-    //     // stub
+    //     // TODO: call external DAI address for balance
     //     return 0;
     // }
+    
+    function getAwardsMadeThisPeriod(address _member) public view returns (uint) {
+        return awardsMadeThisPeriod[currentPeriod][_member];
+    }
+
+    function getRemainingAwardableThisPeriod(address _member) public view returns (uint) {
+        return maxAwardablePerPeriod - getAwardsMadeThisPeriod(_member);
+    }
+    
+    function awardVirtue(address _member, uint _virtueType, uint amount) public returns (uint) {
+        return memberVirtues[_member][_virtueType] += amount;
+    }
     
     function virtueCount() public view returns (uint) {
         return maxVirtueId + 1;
     }
     
     function getVirtue(address _member, uint _virtueType) public view returns (uint) {
-        //stub
-        return 0;
-    }
-
-    function getAwardableThisPeriod(address _member) public view returns (uint) {
-        return maxAwardablePerPeriod;
+        return memberVirtues[_member][_virtueType];
     }
     
-    function getAwardedThisPeriod(address _member) public view returns (uint) {
-        
-    }
-    
-    // function recognizeVirtue(address _member, bytes32 virtueType, uint amount) public {
-    //     // stub
-    // }
-
     // // Virtue -> rDAI: transferFrom(daoAddress, daoMemberAddress, amount)
     // // Member1 -> DAI: transfer(recipientAddress, amount) \n// DAI is member'
     // function claimFellowship() public {
