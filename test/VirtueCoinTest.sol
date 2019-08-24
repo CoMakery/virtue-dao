@@ -5,11 +5,20 @@ import "truffle/DeployedAddresses.sol";
 import "../contracts/VirtueCoin.sol";
 
 contract VirtueCoinTest {
-    function testSomething() public {
-        VirtueCoin virtueCoin = VirtueCoin(DeployedAddresses.VirtueCoin());
-        // bytes32 virtue = "nice";
-        // Assert.equal(virtueCoin.checkVirtue(msg.sender, virtue), 0, "should not have virtue by default");
+    VirtueCoin virtueCoin;
+
+    function beforeEach() public {
+        virtueCoin = VirtueCoin(DeployedAddresses.VirtueCoin());
+    }
+
+    function testCheckingVirtues() public {
+        bytes32 virtueType = "nice";
         uint nada = 0;
-        Assert.equal(virtueCoin.endowmentBalance(), nada, "should start with no endowment");
+        Assert.equal(virtueCoin.checkVirtue(msg.sender, virtueType), nada, "should start with no endowment");
     }    
+
+
+    function testGetVirtues() public {
+        Assert.equal(virtueCoin.virtueCount(), 2, "should return a count");
+    }
 }
