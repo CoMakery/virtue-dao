@@ -1,14 +1,18 @@
 pragma solidity ^0.5.8;
 
-contract VirtueCoin {
+contract VirtueDAO {
     // TODO: add SafeMath back after sketch phase
     // using SafeMath for uint;
 
-    mapping(uint => mapping(address => uint)) public virtueBalances; // virtuid => holderAddress => balance
-    struct PeriodValues {
-        
+    // mapping(uint => mapping(address => uint)) public virtueBalances; // virtuid => holderAddress => balance
+    struct MemberVirtue {
+        uint[5] virtueBalances;
+        uint totalVirtue;
     }
-    mapping(uint => mapping(address => PeriodValues)) public userPeriodValues;
+
+    mapping(address => MemberVirtue) public memberVirtues;
+    mapping(uint => mapping(address => uint)) public awardsMadeThisPeriod; // periodId => user => awardsMadeThisPeriod
+    
     // token awards
     uint public maxVirtueId;
     uint public maxAwardablePerPeriod = 100;
@@ -32,17 +36,17 @@ contract VirtueCoin {
         return maxVirtueId + 1;
     }
     
-    function checkVirtue(address _member, uint _virtueType) public view returns (uint) {
+    function getVirtue(address _member, uint _virtueType) public view returns (uint) {
         //stub
         return 0;
     }
-    
-    function awardableThisPeriod(address _member) public view returns (uint) {
+
+    function getAwardableThisPeriod(address _member) public view returns (uint) {
         return maxAwardablePerPeriod;
     }
     
-    function awardedThisPeriod(address _member) {
-        return maxAwardablePerPeriod;
+    function getAwardedThisPeriod(address _member) public view returns (uint) {
+        
     }
     
     // function recognizeVirtue(address _member, bytes32 virtueType, uint amount) public {
