@@ -4,7 +4,7 @@ contract VirtueDAO {
     // TODO: add SafeMath back after sketch phase
     // using SafeMath for uint;
 
-    mapping(address => mapping(uint => uint)) public memberVirtues; // memberAddress => virtueId => balance
+    mapping(address => mapping(uint => uint)) public allyVirtues; // allyAddress => virtueId => balance
     mapping(uint => mapping(address => uint)) public awardsMadeThisPeriod; // periodId => user => awardsMadeThisPeriod
     
     // token awards
@@ -12,24 +12,24 @@ contract VirtueDAO {
     uint public maxAwardablePerPeriod = 100;
     uint public currentPeriod = 0;
     
-    function getAwardsMadeThisPeriod(address _member) public view returns (uint) {
-        return awardsMadeThisPeriod[currentPeriod][_member];
+    function getAwardsMadeThisPeriod(address _ally) public view returns (uint) {
+        return awardsMadeThisPeriod[currentPeriod][_ally];
     }
 
-    function getRemainingAwardableThisPeriod(address _member) public view returns (uint) {
-        return maxAwardablePerPeriod - getAwardsMadeThisPeriod(_member);
+    function getRemainingAwardableThisPeriod(address _ally) public view returns (uint) {
+        return maxAwardablePerPeriod - getAwardsMadeThisPeriod(_ally);
     }
     
-    function awardVirtue(address _member, uint _virtueId, uint amount) public returns (uint) {
-        return memberVirtues[_member][_virtueId] += amount;
+    function awardVirtue(address _ally, uint _virtueId, uint amount) public returns (uint) {
+        return allyVirtues[_ally][_virtueId] += amount;
     }
     
     function virtueCount() public view returns (uint) {
         return maxVirtueId + 1;
     }
     
-    function getVirtue(address _member, uint _virtueId) public view returns (uint) {
-        return memberVirtues[_member][_virtueId];
+    function getVirtue(address _ally, uint _virtueId) public view returns (uint) {
+        return allyVirtues[_ally][_virtueId];
     }
 
     // TODO: virtue CAP / max dividend 
@@ -39,8 +39,8 @@ contract VirtueDAO {
 
     // function decayVirtue()
 
-    // // Virtue -> rDAI: transferFrom(daoAddress, daoMemberAddress, amount)
-    // // Member1 -> DAI: transfer(recipientAddress, amount) \n// DAI is member'
+    // // Virtue -> rDAI: transferFrom(daoAddress, daoAllyAddress, amount)
+    // // Ally1 -> DAI: transfer(recipientAddress, amount) \n// DAI is ally'
     // function claimFellowship() public {
     //     _calculateFellowship(msg.sender);
     // }
@@ -48,7 +48,7 @@ contract VirtueDAO {
     // // based on virtue tokens received, max values,
     // // decay of virtue since it was awarded 
     // // endowment available during this period
-    // function _calculateFellowship(address _member) private {
+    // function _calculateFellowship(address _ally) private {
     //     // stub
     // }
 

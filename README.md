@@ -2,7 +2,7 @@
 
 # Virtue DAO EnDAOments
 
-The Virtue DAO incentivizes a virtuous swarm of autonomous people aligned with the DAOs mission. Members receive continuous EnDAOment funding based on their virtue. It's a Decentralized Autonomous Organization (DAO) with no proposals!
+The Virtue DAO incentivizes a virtuous swarm of autonomous people aligned with the DAOs mission. Allies receive continuous EnDAOment funding based on their virtue. It's a Decentralized Autonomous Organization (DAO) with no proposals!
 
 ## STATUS: PROOF OF CONCEPT
 
@@ -20,7 +20,7 @@ As a metaphor, consider a monastic order where individuals gain access to the re
 
 Here are some example virtues, drawn from Agile Software Development, the Open Source ethos, Buddhist precepts and the code of chivalry: 
 * Writes open source DAO governance code that is useful to the community
-* Acts to support the welfare of other DAO members
+* Acts to support the welfare of other DAO allies
 * Abstains from false speech
 * Perseveres to the end in any enterprise begun
 * Uses funds granted from the Virtue DAO towards the DAOs mission
@@ -36,33 +36,35 @@ To get more utilitarian, many organizations have a mission, stated values and KP
 1. Likes the mission of the Virtue DAO and wants to support virtuous people and their projects to work towards the goal of the DAO  
 2. Transfers funds in DAI to Compound to receive compound interest on loans
 3. Delegates the interest from their DAI deposit to the Virtue Token Contract address using rDAI
-4. When interest accrues it is allocated Virtuous members through the Virtue DAO
+4. When interest accrues it is allocated Virtuous allies through the Virtue DAO
 
 ### DAO Proposal Endows a Virtue DAO
 
 1. A good person submits a proposal to another DAO with funds, to fund the Virtue DAO
 2. The proposal is accepted
 3. The funding DAO transfers DAI to the Virtue DAO smart contract account 
-4. The funds are dispersed to virtue DAO members in proportion to their virtue
+4. The funds are dispersed to virtue DAO allies in proportion to their virtue
 
-### Member Gets a Dividend
+### Ally Gets a Dividend
 
 1. A person with a blockchain address embodies the virtues of the Virtue DAO
-2. Someone at Virtue DAO sends them Virtue Tokens for their virtues and makes them a member
-3. The member claims their DAI based on the amount of virtue they have been recognized with
+2. Someone at Virtue DAO sends them Virtue Tokens for their virtues and makes them a ally
+3. The ally claims their DAI based on the amount of virtue they have been recognized with
 4. Time passes and their past Virtue Tokens decay
 5. They receive new Virtue Tokens
 6. They claim their DAI based on the amount of virtue they have been recognized with
 
-### Member Recognizes Another Members Virtue by Awarding Virtue Tokens 
+![](assets/virtue-dao)
 
-1. A founding member or person with virtue receives virtue tokens over time to award to other members
-2. They award the tokens to other members who's virtue they recognize 
+### Ally Recognizes Another Allies Virtue by Awarding Virtue Tokens 
+
+1. A initial ally or person with virtue receives virtue tokens over time to award to other allies
+2. They award the tokens to other allies who's virtue they recognize 
 
 ### The Virtue DAO Deployer Configures the Virtue DAO
 
 1. The Virtue DAO deployer configures the projects mission and virtues
-2. Configures the foundingMember blockchain addresses and the number of virtue tokens they receive
+2. Configures the initialAlly blockchain addresses and the number of virtue tokens they receive
 3. Deploys the virtue DAO contract
 
 ## User Virtue Calculations
@@ -78,22 +80,22 @@ virtueAwards[ virtueTypes[n], time[t - i] ] * decay( time[t - i] )
 
 To lower computation this is simplified by only storing the current virtue ratings and running a `decay(Users, Virtues)` function once and only once per period.
 
-## Member Dividend Calculations
+## Ally Dividend Calculations
 
-For the current period each member can withdraw:
+For the current period each ally can withdraw:
 ```
 fellowship(user) = (virtue(user) / totalVirtue) * currentEndowment
 ```
 
 ## Awardable Virtue Tokens Calculation
 
-Each period, each member of the Virtue DAO receives an allocation of virtue tokens. They can award these generic virtue tokens to any person for a specific virtue established by the DAO.
+Each period, each ally of the Virtue DAO receives an allocation of virtue tokens. They can award these generic virtue tokens to any person for a specific virtue established by the DAO.
 
-When the DAO is deployed there is an `awardableByFounderAmount`. This is given to founders each period to make sure there are always some people who can continue to recognize virtue for the DAO.
+When the DAO is deployed there is an `awardableByInitialAllyAmount`. This is given to initial allies each period to make sure there are always some people who can continue to recognize virtue for the DAO. This amount should be less than the awardable amounts people control in an active Virtue DAO.
 
 Each users allocation of tokens for the given period is
 ```
-baseAmount( user ) = if( user is founder ) then founderAllocation else 0
+baseAmount( user ) = if( user is an initial ally) then awardableByInitalAllyAmount else 0
 
 virtueTokenallocationThisPeriod(user) = 
 baseAmount + ( (virtue(user) / maxVirtue) * maxAllocation )
@@ -103,7 +105,7 @@ baseAmount + ( (virtue(user) / maxVirtue) * maxAllocation )
 
 **Why bother having a virtue token? Why not issued a stable coin directly?**
 
-The intent of the Virtue DAO is to continuously fund virtuous people achieving a mission. To calculate the proportion of funds to allocate to each member
+The intent of the Virtue DAO is to continuously fund virtuous people achieving a mission. To calculate the proportion of funds to allocate to each ally
 
 **Do you apply for membership like other DAOs?**
 
@@ -125,7 +127,7 @@ The initial agents can distribute some amount of virtue in every period, regardl
 * Paid with a continuous stipend and access for the virtuous with a sustainable distribution of funds - to maintain continuity of virtue incentives
 * Blockchain anchored reputation verifying who has virtues that support the values and mission of the DAO
 * Monthly allocation of resources with the option to pool resources
-* A fair method of sourcing virtue from DAO members or a third party like Kleros
+* A fair method of sourcing virtue from DAO allies or a third party like Kleros
 * We will probably build on existing DAO codebase like *DAOStack*
 
 ## Thanks!
