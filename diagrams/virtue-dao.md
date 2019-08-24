@@ -7,7 +7,7 @@ participant Virtue as "Virtue Token\nContract"
 participant rDAI
 participant DAI
 actor Patron 
-Virtue -> Virtue: counstructor(foundingMembers, virtues) \n //initial members get virtue tokens of specific types to award
+Virtue -> Virtue: constructor(foundingMembers, virtues) \n //initial members get virtue tokens of specific types to award
 Patron -> DAI: transfer(radaiAddress, amount)
 Patron -> rDAI: allocateInterest(daoAddress)
 

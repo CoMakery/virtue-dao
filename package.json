@@ -8,5 +8,9 @@
   "license": "MIT",
   "scripts": {
     "publish-site": "git subtree push --prefix gh-pages origin gh-pages"
+  },
+  "dependencies": {
+    "truffle": "^5.0.33",
+    "truffle-assertions": "^0.9.1"
   }
 }
