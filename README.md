@@ -18,6 +18,8 @@ Not suitable for funds you do not want to loose yet. Development and security au
 * [rDAI](https://redeem.money) tokens wrap the Compound.finance cDAI for more flexible use
 * Although Virtue DAOs stand on their own currently, they are complimentary to proposal based smart contract frameworks like DAOstack and Aragon
 
+# Overview
+
 ## The Problem With DAO Proposals
 
 Decentralized Autonomous Organizations (DAOs) help us fulfill a common purpose, allocate resources and coordinate activities.
@@ -40,6 +42,8 @@ Here are some example "virtues" as we use them in the context of the Virtue DAO:
 ## The EnDAOment
 
 To support the allies of the DAO, patrons can deposit funds using Compound.finance and rDAI. The underlying DAI stable coin is then lent out to borrowers. The interest from the loans is then used to fund the Virtue DAO allies on an ongoing basis. You can imagine this is similar to a credit union where the loan interest is dedicated to a social purpose.
+
+In addition the Virtue DAO can take direct grants of DAI to be disbursed to allies directly.
 
 # Virtue DAO Use Cases 
 
@@ -105,7 +109,7 @@ To lower computation this is simplified by only storing the current virtue ratin
 
 For the current period each ally can withdraw:
 ```
-fellowship(user) = (virtue(user) / totalVirtue) * currentEndowment
+fellowship(user) = (virtue(user) / totalVirtue) * currentTotalFellowship 
 ```
 
 ## Awardable Virtue Tokens Calculation
