@@ -43,21 +43,21 @@ To get more utilitarian, many organizations have a mission, stated values and KP
 
 ### Member Gets a Dividend
 
-1. Embodies the virtues of the Virtue DAO
-2. Receives Virtue Tokens for their virtues
-3. They claim their DAI based on the amount of virtue they have been recognized with
+1. A person with a blockchain address embodies the virtues of the Virtue DAO
+2. Someone at Virtue DAO sends them Virtue Tokens for their virtues and makes them a member
+3. The member claims their DAI based on the amount of virtue they have been recognized with
 4. Time passes and their past Virtue Tokens decay
 5. They receive new Virtue Tokens
 6. They claim their DAI based on the amount of virtue they have been recognized with
 
 ### Member Recognizes Another Members Virtue by Awarding Virtue Tokens 
 
-1. The foundingMember or person with virtue receives virtue tokens over time to award to other members
+1. A founding member or person with virtue receives virtue tokens over time to award to other members
 2. They award the tokens to other members who's virtue they recognize 
 
 ### The Virtue DAO Deployer Configures the Virtue DAO
 
-1. Configures the projects mission and virtues
+1. The Virtue DAO deployer configures the projects mission and virtues
 2. Configures the foundingMember blockchain addresses and the number of virtue tokens they receive
 3. Deploys the virtue DAO contract
 
