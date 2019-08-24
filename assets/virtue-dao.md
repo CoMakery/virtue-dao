@@ -61,8 +61,6 @@ DAO -> DAI: transfer(patronAddress, amount)
 @enduml
 ```
 
-Need to add DAO constructor method so the hat is configured as a "Self Hat" instead of a "Hat" that can be inherited. This means donate to yourself.
-
 ```plantuml
 @startuml award-virtue 
 hide footbox
