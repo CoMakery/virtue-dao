@@ -26,15 +26,15 @@ async function run() {
     let abi = await util.getABI('/build/virtueDAO.json')
     let virtueDAO = new web3.eth.Contract(abi, daoAddress)
     window.virtueDAO = virtueDAO
+    updateMyVirtuesDisplay(virtueDAO, daoAddress)
+}
 
-    // let virtueCount = await virtueDAO.methods.virtueCount().call()
-    // console.log(virtueCount)
-    let virtues = new Array
+async function updateMyVirtuesDisplay(_virtueDAO, _daoAddress) {
+    let totalPoints = 0
     for(let i = 0; i < 5; i++) {
-        virtues.push(await virtueDAO.methods.getVirtue(daoAddress, 0).call())
+        let points = await _virtueDAO.methods.getVirtue(_daoAddress, 0).call()
+        document.querySelector(`.v${i}`).innerHTML = points
+        totalPoints = totalPoints + parseInt(points)
+        document.querySelector(`.myTotalVirtuePoints`).innerHTML = totalPoints 
     }
-    console.log(virtues)
-    //     await virtueDAO.methods.getVirtue(daoAddress, 0).
-    //     call().
-    //     then((e,i) => console.log(i))
 }
