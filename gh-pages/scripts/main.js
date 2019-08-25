@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', run)
+
 window.Web3 = require('web3')
 console.log("hi from main.js")
 
@@ -21,5 +23,3 @@ async function run() {
     document.querySelector('.coinbase').innerHTML = addr
     document.querySelector('.daoAddress').innerHTML = daoAddress 
 }
-
-document.addEventListener('DOMContentLoaded', run)

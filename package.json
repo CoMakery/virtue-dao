@@ -7,7 +7,7 @@
   "author": "Noah Thorp <noah@comakery.com>",
   "license": "MIT",
   "scripts": {
-    "build": "browserify gh-pages/scripts/main.js -o gh-pages/build/bundle.js",
+    "build": "browserify gh-pages/scripts/main.js -o gh-pages/build/bundle.js && cp build/contracts/* gh-pages/build",
     "publish-site": "git subtree push --prefix gh-pages origin gh-pages",
     "dev": "nodemon -e js --watch gh-pages --ignore gh-pages/build/ --exec \"yarn build && node app.js\""
   },
