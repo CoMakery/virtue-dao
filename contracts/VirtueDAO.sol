@@ -8,7 +8,7 @@ contract VirtueDAO {
     mapping(uint => mapping(address => uint)) public awardsMadeThisPeriod; // periodId => user => awardsMadeThisPeriod
     
     // point awards
-    uint public maxVirtueId = 5;
+    uint public maxVirtueId = 4; // zero index
     uint public maxAwardablePerPeriod = 100;
     uint public currentPeriod = 0;
     
