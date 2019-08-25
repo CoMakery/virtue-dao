@@ -54,7 +54,7 @@ In addition the Virtue DAO can take direct grants of DAI to be disbursed to alli
 
 ![](assets/virtue-dao/award-virtue.png)
 
-## Ally Claims Fellowship 
+## Ally Claims Fellowship In Proportion To Their Virtue
 
 1. A person with a blockchain address embodies the virtues of the Virtue DAO
 2. Someone at Virtue DAO sends them Virtue Points for their virtues and makes them a ally
@@ -128,19 +128,19 @@ baseAmount + ( (virtue(user) / maxVirtue) * maxAllocation )
 
 # FAQs
 
-**Why bother having a virtue points? Why not issued a stable coin directly?**
+## Why bother having a virtue points? Why not issued a stable coin directly?
 
 The intent of the Virtue DAO is to continuously fund virtuous people achieving a mission. Virtue points are used to calculate the proportion of funds to allocate to each ally and to control how virtue decays over time. The decay of virtue is important for maintaining continuity, adapting to the changing activity of allies, and the ongoing incentive to adhere to the virtues of the DAO.
 
-**Do you apply for membership like other DAOs?**
+## Do you apply for membership to the Virtue DAO?
 
 No. If you have virtue you are considered an agent of the DAO and can claim a portion of the continuous distribution of funds. You also can award other people virtue.
 
-**Do you keep your virtue forever?**
+## Do you keep your points virtue forever?
 
 No. Virtue decays gradually over time. You must keep being virtuous and aligned to receive benefits.
 
-**How is Virtue initially distributed? What if no one has remaining virtue?**
+## How is Virtue initially distributed? What if no one has remaining virtue?
 
 The initial agents can distribute some amount of virtue in every period, regardless of their current level of virtue. There may be a better solution to this, but we need to avoid locking funds because everyones virtue has decayed and no one should receive any points.
 
