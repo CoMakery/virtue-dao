@@ -14,6 +14,7 @@ async function run() {
     }
     let addr = await web3.eth.getCoinbase()
     console.log(addr)
+    document.querySelector('.coinbase').innerHTML = addr
 }
 
 document.addEventListener('DOMContentLoaded', run)
