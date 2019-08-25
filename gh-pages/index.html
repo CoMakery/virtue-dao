@@ -3,141 +3,137 @@
 
 <head>
     <title>Virtue DAO EnDAOment</title>
-    <script>
 
-    </script>
-    <style type="text/css">
-        form {
-            max-width: 500px;
-            padding: 20px 12px 10px 20px;
-            font: 13px Arial, Helvetica, sans-serif;
-        }
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Demo of Virtue DAO</title>
+    <meta name="description" content="Demo of virtue DAO">
+    <meta name="author" content="">
 
-        form label {
-            display: block;
-            margin: 15px 0px 15px 0px;
-            font-weight: bold;
-        }
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        form label>span {
-            width: 100px;
-            font-weight: bold;
-            float: left;
-            padding-top: 8px;
-            padding-right: 5px;
-        }
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
-        form span.required {
-            color: red;
-        }
-
-        form .tel-number-field {
-            width: 40px;
-            text-align: center;
-        }
-
-        form input.input-field,
-        form .select-field {
-            width: 48%;
-        }
-
-        form input.input-field,
-        form .tel-number-field,
-        form .textarea-field,
-        form .select-field {
-            box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            border: 1px solid #C2C2C2;
-            box-shadow: 1px 1px 4px #EBEBEB;
-            -moz-box-shadow: 1px 1px 4px #EBEBEB;
-            -webkit-box-shadow: 1px 1px 4px #EBEBEB;
-            border-radius: 3px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            padding: 7px;
-            outline: none;
-        }
-
-        form .input-field:focus,
-        form .tel-number-field:focus,
-        form .textarea-field:focus,
-        form .select-field:focus {
-            border: 1px solid #0C0;
-        }
-
-        form .textarea-field {
-            height: 100px;
-            width: 55%;
-        }
-
-        form input[type=submit],
-        form input[type=button] {
-            border: none;
-            padding: 8px 15px 8px 15px;
-            background: blue;
-            color: #fff;
-            box-shadow: 1px 1px 4px #DADADA;
-            -moz-box-shadow: 1px 1px 4px #DADADA;
-            -webkit-box-shadow: 1px 1px 4px #DADADA;
-            border-radius: 3px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            margin-top: 10px;
-        }
-
-        form input[type=submit]:hover,
-        form input[type=button]:hover {
-            background: #EA7B00;
-            color: #fff;
-        }
-        th {
-            text-align: left;
-        }
-    </style>
-
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
 </head>
 
 <body>
-    <h2>Recognize Virtue</h2>
-    <form action="#" class="form-style-2">
-        <label for="destination">Virtuous Person's Ethereum Address</label>
-        <input type="text" name="destination" value="0x...."><br>
-        <label for="virtues">Virtue They Embodied Recently</label>
-        <select name="virtues">
-            <option value="" selected="selected"></option>
-            <option value="open-source">Writes open source DAO governance code that is useful to the community</option>
-            <option value="helpful">Acts to support the welfare of other DAO allies</option>
-            <option value="truthtful">Abstains from lying</option>
-            <option value="expertise">Shares expertise relevant to our mission</option>
-        </select>
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container" style=" margin-top: 3%">
+        <div class="row">
+            <div class="one-half column">
+                <h1><strong>Virtue DAO</strong></h1>
+            </div>
+            <div class="one-half column>
+                <form action="#">
+                    <input class="button-primary u-pull-right" type="submit" value="Claim Your Fellowship of 100 DAI"
+                        style="border-color: #bbb; background-color: orange">
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="eight columns">
+                <h3>Award Virtue Points</h3>
+                <form action="#">
+                    <label for="destination">Award Ethereum Address</label>
+                    <input type="text" name="destination" value="0x....">
+                    <label for="amount">Virtue Points</label>
+                    <input type="text" name="amount" value="0"> <i>of 12345 available</i>
+                    <label for="virtues">For Embodying The Virtue</label>
+                    <select name="virtues">
+                        <option value="" selected="selected"></option>
+                        <option value="open-source">Writes open source DAO code that is useful to the
+                            community</option>
+                        <option value="helpful">Acts to support the welfare of DAO allies</option>
+                        <option value="truthtful">Abstains from lying</option>
+                        <option value="expertise">Shares expertise relevant to building governance DAOs</option>
+                        <option value="expertise">Uses fellowship funds from the DAO to effectively advance the
+                            mission</option>
+                    </select>
+                    <br />
+                    <input class="button-primary" type="submit" value="Send">
+                </form>
+            </div>
 
-        <label for="amount">Amount of Virtue Points Awarded</label>
-        <input type="text" name="amount" value="0"><br>
-        <input type="submit" value="Send" Address>
-    </form>
-     <strong>Virtue Awards Available:</strong> 12345
-<br />
-<br />
-    <h2>My Current Virtues</h2>
-    <table>
-        <tr><th>Virtue</th><th>Score</th></tr>
-        <tr><td>...</td><td>...</td></tr>
-    </table>
+            <div class="four columns">
+                <h3>My Virtues</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Virtue</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
 
-<br />
-<br />
-    <h2>EnDAOments</h2>
-    <form action="#" >
-        <input type="submit" value="Claim Fellowship of 100 DAI" Address>
-    </form>
-<br />
-<br />
-    <table>
-        <tr><th>Virtue</th><th>Address</th><th>Fellowship Amount</th><th>Virtue Score</th></tr>
-        <tr><td>Me</td><td>0x...</td><td>...</td><td>...</td></tr>
-        <tr><td>...</td><td>0x...</td></td><td>...</td><td>...</td></tr>
-    </table>
+                    <body>
+                        <tr>
+                            <td>1</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                    </body>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="one-half columns">
+                <h3>Allies Virtues</h3>
+                <table>
+                    <tr>
+                        <th>Virtue</th>
+                        <th>Address</th>
+                        <th>Fellowship Amount</th>
+                        <th>Virtue Score</th>
+                    </tr>
+                    <tr>
+                        <td>Me</td>
+                        <td>0x...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>0x...</td>
+                        </td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End Document
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 
 </html>
