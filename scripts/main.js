@@ -2,6 +2,9 @@ window.Web3 = require('web3')
 console.log("hi from main.js")
 
 async function run() {
+    window.daoAddress = '0x9876'
+
+    let daoAddress = window.daoAddress
     let ethereum = window.ethereum;
     let web3 = window.web3;
     if (typeof ethereum !== 'undefined') {
@@ -14,7 +17,9 @@ async function run() {
     }
     let addr = await web3.eth.getCoinbase()
     console.log(addr)
+
     document.querySelector('.coinbase').innerHTML = addr
+    document.querySelector('.daoAddress').innerHTML = daoAddress 
 }
 
 document.addEventListener('DOMContentLoaded', run)
