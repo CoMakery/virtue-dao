@@ -7,10 +7,16 @@
   "author": "Noah Thorp <noah@comakery.com>",
   "license": "MIT",
   "scripts": {
-    "publish-site": "git subtree push --prefix gh-pages origin gh-pages"
+    "build": "browserify gh-pages/scripts/main.js -o gh-pages/build/bundle.js",
+    "publish-site": "git subtree push --prefix gh-pages origin gh-pages",
+    "dev": "nodemon -e js --watch gh-pages --ignore gh-pages/build/ --exec \"yarn build && node app.js\""
   },
   "dependencies": {
+    "browserify": "^16.5.0",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1",
     "truffle": "^5.0.33",
-    "truffle-assertions": "^0.9.1"
+    "truffle-assertions": "^0.9.1",
+    "web3": "^1.2.1"
   }
 }
