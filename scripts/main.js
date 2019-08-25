@@ -26,17 +26,13 @@ async function run() {
     let abi = await util.getABI('/build/virtueDAO.json')
     let virtueDAO = new web3.eth.Contract(abi, daoAddress)
     window.virtueDAO = virtueDAO
+
+    document.querySelector('#awardVirtuePoints')
+        .addEventListener('submit', function (e) {
+            e.preventDefault()
+            awardVirtueSubmit(virtueDAO, addr);
+        });
     await updateMyVirtuesDisplay(virtueDAO, addr)
-
-    virtueDAO.methods.awardVirtue(addr, "0", "10")
-        .send({
-            from: addr
-        }).on('transactionHash', (txnHash) => {
-            util.pollForCompletion(txnHash, async () => {
-                await updateMyVirtuesDisplay(virtueDAO, addr)
-            })
-        })
-
 }
 async function updateMyVirtuesDisplay(_virtueDAO, _daoAddress) {
     let totalPoints = 0
@@ -46,4 +42,20 @@ async function updateMyVirtuesDisplay(_virtueDAO, _daoAddress) {
         totalPoints = totalPoints + parseInt(points)
         document.querySelector(`.myTotalVirtuePoints`).innerHTML = totalPoints
     }
+}
+
+function awardVirtueSubmit(_virtueDAO, _addr) {
+    let awardTo = document.querySelector('#awardTo').value
+    let awardAmount = document.querySelector('#awardAmount').value
+    let virtueId = document.querySelector('#virtueAwarded').value
+    console.log(awardTo, virtueId, awardAmount)
+
+    virtueDAO.methods.awardVirtue(awardTo, virtueId, awardAmount)
+        .send({
+            from: _addr
+        }).on('transactionHash', (txnHash) => {
+            util.pollForCompletion(txnHash, async () => {
+                await updateMyVirtuesDisplay(_virtueDAO, _addr)
+            })
+        })
 }
