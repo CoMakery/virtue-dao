@@ -23,24 +23,32 @@ async function run() {
     console.log(addr)
 
     document.querySelector('.coinbase').innerHTML = addr
-    document.querySelector('.daoAddress').innerHTML = daoAddress 
+    document.querySelector('.daoAddress').innerHTML = daoAddress
 
     let abi = await util.getABI('/build/virtueDAO.json')
     let virtueDAO = new web3.eth.Contract(abi, daoAddress)
     window.virtueDAO = virtueDAO
-    updateMyVirtuesDisplay(virtueDAO, daoAddress)
-}
+    await updateMyVirtuesDisplay(virtueDAO, addr)
 
+    virtueDAO.methods.awardVirtue(addr, "0", "10")
+        .send({
+            from: addr
+        }).on('transactionHash', (txnHash) => {
+            util.pollForCompletion(txnHash, async () => {
+                await updateMyVirtuesDisplay(virtueDAO, addr)
+            })
+        })
+
+}
 async function updateMyVirtuesDisplay(_virtueDAO, _daoAddress) {
     let totalPoints = 0
-    for(let i = 0; i < 5; i++) {
-        let points = await _virtueDAO.methods.getVirtue(_daoAddress, 0).call()
+    for (let i = 0; i < 5; i++) {
+        let points = await _virtueDAO.methods.getVirtue(_daoAddress, i).call()
         document.querySelector(`.v${i}`).innerHTML = points
         totalPoints = totalPoints + parseInt(points)
-        document.querySelector(`.myTotalVirtuePoints`).innerHTML = totalPoints 
+        document.querySelector(`.myTotalVirtuePoints`).innerHTML = totalPoints
     }
 }
-
 }).call(this,require('_process'))
 },{"_process":177,"web3":309}],2:[function(require,module,exports){
 window.util = {}
@@ -50,6 +58,31 @@ window.util.getABI = async function getABI(path) {
         return await response.json()
     })
     return rawResponse["abi"];
+}
+
+window.util.pollForCompletion = function pollForCompletion(txHash, callback) {
+    let calledBack = false
+    const checkInterval = setInterval(function () {
+        const notYet = 'response has no error or result'
+        ethereum.sendAsync({
+            method: 'eth_getTransactionByHash',
+            params: [txHash],
+        }, function (err, response) {
+            if (calledBack) return
+            if (err || response.error) {
+                if (err.message.includes(notYet)) {
+                    return 'transactiion is not yet mined'
+                }
+
+                callback(err || response.error)
+            }
+
+            const transaction = response.result
+            clearInterval(checkInterval)
+            calledBack = true
+            callback(null, transaction)
+        })
+    }, 2000)
 }
 },{}],3:[function(require,module,exports){
 module.exports = require('./register')().Promise

@@ -21,20 +21,29 @@ async function run() {
     console.log(addr)
 
     document.querySelector('.coinbase').innerHTML = addr
-    document.querySelector('.daoAddress').innerHTML = daoAddress 
+    document.querySelector('.daoAddress').innerHTML = daoAddress
 
     let abi = await util.getABI('/build/virtueDAO.json')
     let virtueDAO = new web3.eth.Contract(abi, daoAddress)
     window.virtueDAO = virtueDAO
-    updateMyVirtuesDisplay(virtueDAO, daoAddress)
-}
+    await updateMyVirtuesDisplay(virtueDAO, addr)
 
+    virtueDAO.methods.awardVirtue(addr, "0", "10")
+        .send({
+            from: addr
+        }).on('transactionHash', (txnHash) => {
+            util.pollForCompletion(txnHash, async () => {
+                await updateMyVirtuesDisplay(virtueDAO, addr)
+            })
+        })
+
+}
 async function updateMyVirtuesDisplay(_virtueDAO, _daoAddress) {
     let totalPoints = 0
-    for(let i = 0; i < 5; i++) {
-        let points = await _virtueDAO.methods.getVirtue(_daoAddress, 0).call()
+    for (let i = 0; i < 5; i++) {
+        let points = await _virtueDAO.methods.getVirtue(_daoAddress, i).call()
         document.querySelector(`.v${i}`).innerHTML = points
         totalPoints = totalPoints + parseInt(points)
-        document.querySelector(`.myTotalVirtuePoints`).innerHTML = totalPoints 
+        document.querySelector(`.myTotalVirtuePoints`).innerHTML = totalPoints
     }
 }
