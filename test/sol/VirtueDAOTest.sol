@@ -2,7 +2,7 @@ pragma solidity ^0.5.8;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
-import "../contracts/VirtueDAO.sol";
+import "../../contracts/VirtueDAO.sol";
 
 contract VirtueDAOTest {
     VirtueDAO virtueDAO;
