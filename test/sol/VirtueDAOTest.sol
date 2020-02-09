@@ -15,5 +15,5 @@ contract VirtueDAOTest {
         uint virtueType = 0;
         uint nada = 0;
         Assert.equal(virtueDAO.getVirtue(msg.sender, virtueType), nada, "should start with no endowment");
-    }    
+    }
 }

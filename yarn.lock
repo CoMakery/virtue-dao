@@ -3347,9 +3347,10 @@ tough-cookie@~2.4.3:
     psl "^1.1.24"
     punycode "^1.4.1"
 
-truffle-assertions@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/truffle-assertions/-/truffle-assertions-0.9.1.tgz#74379a208f1175d6de9f33fba9a8cbb3aec27aa5"
+truffle-assertions@^0.9.2:
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/truffle-assertions/-/truffle-assertions-0.9.2.tgz#0f8360f53ad92b6d8fdb8ceb5dce54c1fc392e23"
+  integrity sha512-9g2RhaxU2F8DeWhqoGQvL/bV8QVoSnQ6PY+ZPvYRP5eF7+/8LExb4mjLx/FeliLTjc3Tv1SABG05Gu5qQ/ErmA==
   dependencies:
     assertion-error "^1.1.0"
     lodash.isequal "^4.5.0"

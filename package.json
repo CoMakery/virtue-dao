@@ -9,14 +9,16 @@
   "scripts": {
     "build": "browserify gh-pages/scripts/*.js -o gh-pages/build/bundle.js && cp build/contracts/* gh-pages/build",
     "publish-site": "git subtree push --prefix gh-pages origin gh-pages",
-    "dev": "nodemon -e js --watch gh-pages --ignore gh-pages/build/ --exec \"yarn build && node app.js\""
+    "dev": "nodemon -e js --watch gh-pages --ignore gh-pages/build/ --exec \"yarn build && node app.js\"",
+    "test": "yarn truffle test",
+    "test:js": "yarn truffle test test/js/*"
   },
   "dependencies": {
     "browserify": "^16.5.0",
     "express": "^4.17.1",
     "nodemon": "^1.19.1",
     "truffle": "^5.0.33",
-    "truffle-assertions": "^0.9.1",
+    "truffle-assertions": "^0.9.2",
     "web3": "^1.2.1"
   }
 }
