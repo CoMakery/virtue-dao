@@ -1,4 +1,4 @@
-// const truffleAssert = require('truffle-assertions');
+const truffleAssert = require('truffle-assertions');
 const VirtueDAO = artifacts.require("VirtueDAO");
 
 contract("Access control tests", function (accounts) {
@@ -37,5 +37,19 @@ contract("Access control tests", function (accounts) {
         await vDAO.awardVirtue(bob, 0, 100, {
             from: alice
         })
+    })
+    it('can only award virtue up to the amount awardable this period', async () => {
+        await vDAO.awardVirtue(bob, 0, 100, {
+            from: alice
+        })
+        let remainingAwardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
+        expect(remainingAwardable).to.equal(0)
+
+        await truffleAssert.reverts(vDAO.awardVirtue(bob, 1, 100, {
+            from: alice
+        }), "Error: not enough virtue to award")
+
+        remainingAwardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
+        expect(remainingAwardable).to.equal(0)
     })
 })

@@ -21,6 +21,8 @@ contract VirtueDAO {
     }
     
     function awardVirtue(address _ally, uint _virtueId, uint amount) public returns (uint) {
+        require(awardsMadeThisPeriod[currentPeriod][msg.sender] < amount, "Error: not enough virtue to award");
+        awardsMadeThisPeriod[currentPeriod][msg.sender] += amount;
         return allyVirtues[_ally][_virtueId] += amount;
     }
     
