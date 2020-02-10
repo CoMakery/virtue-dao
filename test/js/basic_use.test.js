@@ -122,7 +122,7 @@ contract("Access control tests", function (accounts) {
         expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(61)
     })
 
-    it('awarding virtue increases the totalSupply of virtue', async () => {
+    it('awarding virtue increases the totalSupply() of virtue', async () => {
         expect((await vDAO.totalSupply()).toNumber()).to.equal(0)
 
         await vDAO.transfer(bob, 75, {
@@ -135,5 +135,28 @@ contract("Access control tests", function (accounts) {
             from: bob
         })
         expect((await vDAO.totalSupply()).toNumber()).to.equal(155)
+    })
+
+    it('last period decayed is initialized to the current period', async () => {
+        expect((await vDAO.lastPeriodDecayed()).toNumber())
+            .to.equal((await vDAO.currentPeriod()).toNumber())
+    })
+
+    it('decayVirtue only can be called once per period', async () => {
+        await vDAO.transfer(bob, 100, {
+            from: alice
+        })
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(100)
+        
+        advanceTime(secondsPerWeek)
+        await vDAO.decayVirtue(bob)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
+
+        await vDAO.decayVirtue(bob)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
+
+        advanceTime(secondsPerWeek)
+        await vDAO.decayVirtue(bob)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(72)
     })
 })

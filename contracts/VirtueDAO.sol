@@ -9,6 +9,7 @@ contract VirtueDAO is Context, IERC20 {
     string public symbol = "VDAOA";
     string public name = "Virtue DAO Alpha";
     uint8 public decimals = 0;
+    uint public lastPeriodDecayed;
     uint _totalSupply = 0;
 
     mapping(address => uint) public allyVirtues; // allyAddress => pointBalance
@@ -17,6 +18,10 @@ contract VirtueDAO is Context, IERC20 {
     // point awards
     uint public maxAwardablePerPeriod = 100;
     uint public virtueRetainedPercent = 85;
+
+    constructor() public {
+        lastPeriodDecayed = (now / 604800);
+    }
 
     function getAwardsMadeThisPeriod(address _ally) public view returns (uint) {
         return awardsMadeThisPeriod[currentPeriod()][_ally];
@@ -45,7 +50,10 @@ contract VirtueDAO is Context, IERC20 {
     }
 
     function decayVirtue(address _ally) public {
-        allyVirtues[_ally] = allyVirtues[_ally].mul(virtueRetainedPercent).div(100);
+        if(lastPeriodDecayed < currentPeriod()) {
+            allyVirtues[_ally] = allyVirtues[_ally].mul(virtueRetainedPercent).div(100);
+            lastPeriodDecayed = currentPeriod();
+        }
     }
 
     function virtueDecayPercent() public view returns (uint) {
