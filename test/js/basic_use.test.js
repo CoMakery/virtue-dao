@@ -1,5 +1,6 @@
-const truffleAssert = require('truffle-assertions');
-const VirtueDAO = artifacts.require("VirtueDAO");
+const truffleAssert = require('truffle-assertions')
+const {advanceTime} = require('./helpers/helpers.js')
+const VirtueDAO = artifacts.require("VirtueDAO")
 
 contract("Access control tests", function (accounts) {
     var deployer, vDAO, alice, bob
@@ -52,5 +53,19 @@ contract("Access control tests", function (accounts) {
 
         remainingAwardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
         expect(remainingAwardable).to.equal(0)
+    })
+
+    it('has a period per week',  async () => {
+        let currentPeriod = (await vDAO.currentPeriod()).toNumber()
+
+        let secondsPerWeek = 604800
+        let now = (await web3.eth.getBlock(await web3.eth.getBlockNumber())).timestamp
+        let currentWeekSinceUnixEpoch = Math.floor(now / secondsPerWeek)
+
+        expect(currentPeriod).to.equal(currentWeekSinceUnixEpoch)
+
+        advanceTime(secondsPerWeek)
+        currentPeriod = (await vDAO.currentPeriod()).toNumber()
+        expect(currentPeriod).to.equal(currentWeekSinceUnixEpoch + 1)
     })
 })

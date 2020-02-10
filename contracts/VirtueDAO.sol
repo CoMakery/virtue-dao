@@ -10,10 +10,9 @@ contract VirtueDAO {
     // point awards
     uint public maxVirtueId = 4; // zero indexed
     uint public maxAwardablePerPeriod = 100;
-    uint public currentPeriod = 0;
 
     function getAwardsMadeThisPeriod(address _ally) public view returns (uint) {
-        return awardsMadeThisPeriod[currentPeriod][_ally];
+        return awardsMadeThisPeriod[currentPeriod()][_ally];
     }
 
     function getRemainingAwardableThisPeriod(address _ally) public view returns (uint) {
@@ -21,8 +20,8 @@ contract VirtueDAO {
     }
 
     function awardVirtue(address _ally, uint _virtueId, uint amount) public returns (uint) {
-        require(awardsMadeThisPeriod[currentPeriod][msg.sender] < amount, "Error: not enough virtue to award");
-        awardsMadeThisPeriod[currentPeriod][msg.sender] = awardsMadeThisPeriod[currentPeriod][msg.sender].add(amount);
+        require(awardsMadeThisPeriod[(currentPeriod())][msg.sender] < amount, "Error: not enough virtue to award");
+        awardsMadeThisPeriod[(currentPeriod())][msg.sender] = awardsMadeThisPeriod[(currentPeriod())][msg.sender].add(amount);
         return allyVirtues[_ally][_virtueId] = allyVirtues[_ally][_virtueId].add(amount);
     }
 
@@ -32,6 +31,10 @@ contract VirtueDAO {
 
     function getVirtue(address _ally, uint _virtueId) public view returns (uint) {
         return allyVirtues[_ally][_virtueId];
+    }
+
+    function currentPeriod() public view returns (uint) {
+        return now / 604800; // week number since the unix epoch
     }
 
     // TODO: virtue CAP / max dividend 
