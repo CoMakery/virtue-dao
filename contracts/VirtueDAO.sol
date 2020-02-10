@@ -54,15 +54,23 @@ contract VirtueDAO is Context, IERC20 {
         return 0;
     }
 
-    function allowance(address owner, address spender) external view returns (uint256) {
+    // remains for ERC20 compatibility not used
+    // may be implemented in a later version
+    function allowance(address, address) external view returns (uint256) {
         return 0;
     }
 
-    function approve(address spender, uint256 amount) external returns (bool) {
+    // remains for ERC20 compatibility not used
+    // may be implemented in a later version
+    function approve(address, uint256) external returns (bool) {
+        require(false, "Error: cannot approve transfer of virtue by other accounts");
         return false;
     }
 
-    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool) {
+    // remains for ERC20 compatibility not used
+    // may be implemented in a later version
+    function transferFrom(address, address, uint256) external returns (bool) {
+        require(false, "Error: cannot transfer virtue on behalf of other accounts");
         return false;
     }
 
