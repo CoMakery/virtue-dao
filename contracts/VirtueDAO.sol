@@ -31,7 +31,7 @@ contract VirtueDAO is Context, IERC20 {
         return allyVirtues[_ally] = allyVirtues[_ally].add(amount);
     }
 
-    function getVirtue(address _ally) public view returns (uint) {
+    function balanceOf(address _ally) public view returns (uint) {
         return allyVirtues[_ally];
     }
 
@@ -48,10 +48,6 @@ contract VirtueDAO is Context, IERC20 {
     }
 
     function totalSupply() external view returns (uint256) {
-        return 0;
-    }
-
-    function balanceOf(address account) external view returns (uint256) {
         return 0;
     }
 

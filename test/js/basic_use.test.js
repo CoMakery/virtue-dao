@@ -22,7 +22,7 @@ contract("Access control tests", function (accounts) {
         expect(maxAwardablePerPeriod).to.equal(100)
     })
     it('check virtue', async () => {
-        let virtue = parseInt(await vDAO.getVirtue(alice))
+        let virtue = parseInt(await vDAO.balanceOf(alice))
         expect(virtue).to.equal(0)
     })
 
@@ -30,7 +30,7 @@ contract("Access control tests", function (accounts) {
         await vDAO.awardVirtue(bob, 100, {
             from: alice
         })
-        let virtue = (await vDAO.getVirtue(bob)).toNumber()
+        let virtue = (await vDAO.balanceOf(bob)).toNumber()
         expect(virtue).to.equal(100)
     })
 
@@ -107,18 +107,18 @@ contract("Access control tests", function (accounts) {
         await vDAO.awardVirtue(bob, 100, {
             from: alice
         })
-        expect((await vDAO.getVirtue(bob)).toNumber()).to.equal(100)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(100)
 
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue(bob)
-        expect((await vDAO.getVirtue(bob)).toNumber()).to.equal(85)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
 
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue(bob)
-        expect((await vDAO.getVirtue(bob)).toNumber()).to.equal(72)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(72)
 
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue(bob)
-        expect((await vDAO.getVirtue(bob)).toNumber()).to.equal(61)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(61)
     })
 })

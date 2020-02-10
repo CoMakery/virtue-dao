@@ -37,7 +37,7 @@ async function run() {
 async function updateMyVirtuesDisplay(_virtueDAO, _daoAddress) {
     let totalPoints = 0
     for (let i = 0; i < 5; i++) {
-        let points = await _virtueDAO.methods.getVirtue(_daoAddress, i).call()
+        let points = await _virtueDAO.methods.balanceOf(_daoAddress, i).call()
         document.querySelector(`.v${i}`).innerHTML = points
         totalPoints = totalPoints + parseInt(points)
         document.querySelector(`.myTotalVirtuePoints`).innerHTML = totalPoints

@@ -13,6 +13,6 @@ contract VirtueDAOTest {
 
     function testCheckingVirtue() public {
         uint nada = 0;
-        Assert.equal(virtueDAO.getVirtue(msg.sender), nada, "should start with no endowment");
+        Assert.equal(virtueDAO.balanceOf(msg.sender), nada, "should start with no endowment");
     }
 }
