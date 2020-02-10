@@ -38,6 +38,7 @@ contract("Access control tests", function (accounts) {
             from: alice
         })
     })
+    
     it('can only award virtue up to the amount awardable this period', async () => {
         await vDAO.awardVirtue(bob, 0, 100, {
             from: alice
