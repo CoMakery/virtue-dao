@@ -69,6 +69,6 @@ actor Ally1 as "DAO\nAlly"
 participant DAO as "Virtue DAO\nContract"
 Ally1 -> DAO: getRemainingAwardableThisPeriod(address, virtueType)
 Ally1 -> DAO: getVirtue(address, virtueType)
-Ally1 -> DAO: awardVirtue(address, virtueType, amount)
+Ally1 -> DAO: transfer(address, virtueType, amount)
 @enduml
 ```

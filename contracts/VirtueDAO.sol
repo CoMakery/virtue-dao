@@ -25,10 +25,13 @@ contract VirtueDAO is Context, IERC20 {
         return maxAwardablePerPeriod.sub(getAwardsMadeThisPeriod(_ally));
     }
 
-    function awardVirtue(address _ally, uint amount) public returns (uint) {
+    // award virtue to a virtuous ally
+    // virtue is awardable each period
+    function transfer(address _ally, uint amount) external returns (bool) {
         require(awardsMadeThisPeriod[(currentPeriod())][msg.sender] < amount, "Error: not enough virtue to award");
         awardsMadeThisPeriod[(currentPeriod())][msg.sender] = awardsMadeThisPeriod[(currentPeriod())][msg.sender].add(amount);
-        return allyVirtues[_ally] = allyVirtues[_ally].add(amount);
+        allyVirtues[_ally] = allyVirtues[_ally].add(amount);
+        return true;
     }
 
     function balanceOf(address _ally) public view returns (uint) {
@@ -49,10 +52,6 @@ contract VirtueDAO is Context, IERC20 {
 
     function totalSupply() external view returns (uint256) {
         return 0;
-    }
-
-    function transfer(address recipient, uint256 amount) external returns (bool) {
-        return false;
     }
 
     function allowance(address owner, address spender) external view returns (uint256) {
