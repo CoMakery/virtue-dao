@@ -1,6 +1,8 @@
 const truffleAssert = require('truffle-assertions')
 const {advanceTime} = require('./helpers/helpers.js')
 const VirtueDAO = artifacts.require("VirtueDAO")
+const secondsPerWeek = 604800
+
 
 contract("Access control tests", function (accounts) {
     var deployer, vDAO, alice, bob
@@ -58,7 +60,6 @@ contract("Access control tests", function (accounts) {
     it('has a period per week',  async () => {
         let currentPeriod = (await vDAO.currentPeriod()).toNumber()
 
-        let secondsPerWeek = 604800
         let now = (await web3.eth.getBlock(await web3.eth.getBlockNumber())).timestamp
         let currentWeekSinceUnixEpoch = Math.floor(now / secondsPerWeek)
 
@@ -67,5 +68,37 @@ contract("Access control tests", function (accounts) {
         advanceTime(secondsPerWeek)
         currentPeriod = (await vDAO.currentPeriod()).toNumber()
         expect(currentPeriod).to.equal(currentWeekSinceUnixEpoch + 1)
+
+        advanceTime(secondsPerWeek)
+        currentPeriod = (await vDAO.currentPeriod()).toNumber()
+        expect(currentPeriod).to.equal(currentWeekSinceUnixEpoch + 2)
+    })
+
+    it('get new tokens to award each week', async () => {
+        await vDAO.awardVirtue(bob, 0, 100, {
+            from: alice
+        })
+        let awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
+        expect(awardable).to.equal(0)
+
+        advanceTime(secondsPerWeek)
+        awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
+        expect(awardable).to.equal(100)
+        await vDAO.awardVirtue(bob, 0, 100, {
+            from: alice
+        })
+        awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
+        expect(awardable).to.equal(0)
+        advanceTime(secondsPerWeek)
+
+        advanceTime(secondsPerWeek)
+        awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
+        expect(awardable).to.equal(100)
+        await vDAO.awardVirtue(bob, 0, 100, {
+            from: alice
+        })
+        awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
+        expect(awardable).to.equal(0)
+        advanceTime(secondsPerWeek)
     })
 })
