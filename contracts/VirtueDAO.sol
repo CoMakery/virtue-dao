@@ -11,6 +11,7 @@ contract VirtueDAO is Context, IERC20 {
     uint8 public decimals = 0;
     uint public lastPeriodDecayed;
     address[] public allies; // TODO: find a way to decay without looping over allies each period
+    mapping(address => bool) isFounder;
     
     uint _totalSupply = 0;
 
@@ -19,9 +20,14 @@ contract VirtueDAO is Context, IERC20 {
     mapping(address => bool) public isAlly;
     // point awards
     uint public maxAwardablePerPeriod = 100;
-    uint public virtueRetainedPercent = 85;
+    uint public virtueRetainedPercent = 80;
+    uint public founderMinAwardable = 100;
+    uint public nonFounderAwardableDivisor = 5;
 
-    constructor() public {
+    constructor(address[] memory _founders) public {
+        for (uint i = 0; i < _founders.length; i++) {
+            isFounder[_founders[i]] = true;
+        }
         lastPeriodDecayed = (now / 604800);
     }
 
@@ -32,16 +38,27 @@ contract VirtueDAO is Context, IERC20 {
         return awardsMadeThisPeriod[currentPeriod()][_ally];
     }
     
-    // TODO: change individual awarded amount to be limited by their virtue. e.g. sqrt(balanceOf(msg.sender))
     function getRemainingAwardableThisPeriod(address _ally) public view returns (uint) {
-        return maxAwardablePerPeriod.sub(getAwardsMadeThisPeriod(_ally));
+        return maxAwardableThisPeriod(_ally).sub(getAwardsMadeThisPeriod(_ally));
+    }
+
+    // non founders get 1/5 of their virtue to award
+    // founders get greater of founderMinAwardable or 1/5 virtue
+    // non one can exceed the max amount
+    function maxAwardableThisPeriod(address _ally) public view returns (uint) {
+        if(isFounder[_ally]) {
+            return founderMinAwardable;
+        } else {
+            return allyVirtues[_ally] / nonFounderAwardableDivisor;
+        }
     }
 
     // award virtue to a virtuous ally
     // virtue is awardable each period
     // TODO: find a way to decay without looping over allies each period
     function transfer(address _ally, uint amount) external returns (bool) {
-        require((awardsMadeThisPeriod[(currentPeriod())][msg.sender] + amount) <= maxAwardablePerPeriod, "Error: not enough virtue to award");
+        require((awardsMadeThisPeriod[(currentPeriod())][msg.sender] + amount) <= maxAwardableThisPeriod(msg.sender),
+         "Error: not enough virtue to award");
         
         if(isAlly[_ally] == false) {
             allies.push(_ally);

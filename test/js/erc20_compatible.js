@@ -5,14 +5,15 @@ const secondsPerWeek = 604800
 
 
 contract("Access control tests", function (accounts) {
-    var deployer, vDAO, alice, bob
+    var deployer, vDAO, alice, bob, nonFounder
 
     beforeEach(async function () {
         deployer = accounts[0]
         alice = accounts[1]
         bob = accounts[2]
+        nonFounder = accounts[3]
 
-        vDAO = await VirtueDAO.new()
+        vDAO = await VirtueDAO.new([deployer, alice, bob])
     })
 
     it("check ERC20 details", async () => {

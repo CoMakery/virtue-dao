@@ -5,14 +5,15 @@ const secondsPerWeek = 604800
 
 
 contract("Access control tests", function (accounts) {
-    var deployer, vDAO, alice, bob
+    var deployer, vDAO, alice, bob, nonFounder
 
     beforeEach(async function () {
         deployer = accounts[0]
         alice = accounts[1]
         bob = accounts[2]
+        nonFounder = accounts[3]
 
-        vDAO = await VirtueDAO.new()
+        vDAO = await VirtueDAO.new([deployer, alice, bob])
     })
 
     it("get maxAwardablePerPeriod", async () => {
@@ -103,7 +104,7 @@ contract("Access control tests", function (accounts) {
     })
 
     it('virtue decays each period', async () => {
-        expect((await vDAO.virtueDecayPercent()).toNumber()).to.equal(15)
+        expect((await vDAO.virtueDecayPercent()).toNumber()).to.equal(20)
         await vDAO.transfer(bob, 100, {
             from: alice
         })
@@ -111,15 +112,15 @@ contract("Access control tests", function (accounts) {
 
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue()
-        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(80)
 
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue()
-        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(72)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(64)
 
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue()
-        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(61)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(51)
     })
 
     it('awarding virtue increases the totalSupply() of virtue', async () => {
@@ -150,14 +151,14 @@ contract("Access control tests", function (accounts) {
         
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue()
-        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(80)
 
         await vDAO.decayVirtue()
-        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(80)
 
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue()
-        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(72)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(64)
     })
 
     it('decayVirtue decays all allies virtue', async () => {
@@ -172,8 +173,8 @@ contract("Access control tests", function (accounts) {
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue()
 
-        expect((await vDAO.balanceOf(alice)).toNumber()).to.equal(85)
-        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
+        expect((await vDAO.balanceOf(alice)).toNumber()).to.equal(80)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(80)
     })
 
     it('only adds an ally to the allies list once', async () => {
@@ -189,5 +190,29 @@ contract("Access control tests", function (accounts) {
             from: alice
         })
         expect((await vDAO.allyCount()).toNumber()).to.equal(1)
+    })
+
+    it('founders can always award the founderMinAwardable per period', async () => {
+        let founderMinAwardable = (await vDAO.founderMinAwardable()).toNumber()
+        let awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
+        expect(awardable).to.equal(100)
+        expect(awardable).to.equal(founderMinAwardable)
+    })
+
+    it('non founders start out with an amount awardable equal to 0', async () => {
+        let awardable = (await vDAO.getRemainingAwardableThisPeriod(nonFounder)).toNumber()
+        expect(awardable).to.equal(0)
+    })
+
+    it('non founders can award 1/5 of their virtue per period', async () => {
+        let awardable = (await vDAO.getRemainingAwardableThisPeriod(nonFounder)).toNumber()
+        expect(awardable).to.equal(0)
+
+        await vDAO.transfer(nonFounder, 100, {
+            from: alice
+        })
+
+        awardable = (await vDAO.getRemainingAwardableThisPeriod(nonFounder)).toNumber()
+        expect(awardable).to.equal(20)
     })
 })
