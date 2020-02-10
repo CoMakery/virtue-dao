@@ -10,11 +10,13 @@ contract VirtueDAO is Context, IERC20 {
     string public name = "Virtue DAO Alpha";
     uint8 public decimals = 0;
     uint public lastPeriodDecayed;
+    address[] public allies; // TODO: find a way to decay without looping over allies each period
+    
     uint _totalSupply = 0;
 
     mapping(address => uint) public allyVirtues; // allyAddress => pointBalance
     mapping(uint => mapping(address => uint)) public awardsMadeThisPeriod; // periodId => user => awardsMadeThisPeriod
-
+    mapping(address => bool) public isAlly;
     // point awards
     uint public maxAwardablePerPeriod = 100;
     uint public virtueRetainedPercent = 85;
@@ -23,18 +25,29 @@ contract VirtueDAO is Context, IERC20 {
         lastPeriodDecayed = (now / 604800);
     }
 
+    function allyCount() public view returns (uint) {
+        return allies.length;
+    }
     function getAwardsMadeThisPeriod(address _ally) public view returns (uint) {
         return awardsMadeThisPeriod[currentPeriod()][_ally];
     }
-
+    
+    // TODO: change individual awarded amount to be limited by their virtue. e.g. sqrt(balanceOf(msg.sender))
     function getRemainingAwardableThisPeriod(address _ally) public view returns (uint) {
         return maxAwardablePerPeriod.sub(getAwardsMadeThisPeriod(_ally));
     }
 
     // award virtue to a virtuous ally
     // virtue is awardable each period
+    // TODO: find a way to decay without looping over allies each period
     function transfer(address _ally, uint amount) external returns (bool) {
-        require(awardsMadeThisPeriod[(currentPeriod())][msg.sender] < amount, "Error: not enough virtue to award");
+        require((awardsMadeThisPeriod[(currentPeriod())][msg.sender] + amount) <= maxAwardablePerPeriod, "Error: not enough virtue to award");
+        
+        if(isAlly[_ally] == false) {
+            allies.push(_ally);
+            isAlly[_ally] = true;
+        }
+
         awardsMadeThisPeriod[(currentPeriod())][msg.sender] = awardsMadeThisPeriod[(currentPeriod())][msg.sender].add(amount);
         allyVirtues[_ally] = allyVirtues[_ally].add(amount);
         _totalSupply = _totalSupply.add(amount);
@@ -49,11 +62,18 @@ contract VirtueDAO is Context, IERC20 {
         return now / 604800; // week number since the unix epoch
     }
 
-    function decayVirtue(address _ally) public {
+
+    function decayVirtue() public {
         if(lastPeriodDecayed < currentPeriod()) {
-            allyVirtues[_ally] = allyVirtues[_ally].mul(virtueRetainedPercent).div(100);
+            for(uint i; i < allies.length; i++) {
+                _decayVirtue(allies[i]);
+            }
             lastPeriodDecayed = currentPeriod();
         }
+    }
+    
+    function _decayVirtue(address _ally) private {
+        allyVirtues[_ally] = allyVirtues[_ally].mul(virtueRetainedPercent).div(100);
     }
 
     function virtueDecayPercent() public view returns (uint) {

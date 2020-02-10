@@ -110,15 +110,15 @@ contract("Access control tests", function (accounts) {
         expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(100)
 
         advanceTime(secondsPerWeek)
-        await vDAO.decayVirtue(bob)
+        await vDAO.decayVirtue()
         expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
 
         advanceTime(secondsPerWeek)
-        await vDAO.decayVirtue(bob)
+        await vDAO.decayVirtue()
         expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(72)
 
         advanceTime(secondsPerWeek)
-        await vDAO.decayVirtue(bob)
+        await vDAO.decayVirtue()
         expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(61)
     })
 
@@ -149,14 +149,45 @@ contract("Access control tests", function (accounts) {
         expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(100)
         
         advanceTime(secondsPerWeek)
-        await vDAO.decayVirtue(bob)
+        await vDAO.decayVirtue()
         expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
 
-        await vDAO.decayVirtue(bob)
+        await vDAO.decayVirtue()
         expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
 
         advanceTime(secondsPerWeek)
-        await vDAO.decayVirtue(bob)
+        await vDAO.decayVirtue()
         expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(72)
+    })
+
+    it('decayVirtue decays all allies virtue', async () => {
+        await vDAO.transfer(bob, 100, {
+            from: alice
+        })
+
+        await vDAO.transfer(alice, 100, {
+            from: bob
+        })
+
+        advanceTime(secondsPerWeek)
+        await vDAO.decayVirtue()
+
+        expect((await vDAO.balanceOf(alice)).toNumber()).to.equal(85)
+        expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(85)
+    })
+
+    it('only adds an ally to the allies list once', async () => {
+        expect((await vDAO.allyCount()).toNumber()).to.equal(0)
+
+        await vDAO.transfer(bob, 10, {
+            from: alice
+        })
+        expect((await vDAO.allyCount()).toNumber()).to.equal(1)
+
+
+        await vDAO.transfer(bob, 10, {
+            from: alice
+        })
+        expect((await vDAO.allyCount()).toNumber()).to.equal(1)
     })
 })
