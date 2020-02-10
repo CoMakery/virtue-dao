@@ -22,34 +22,34 @@ contract("Access control tests", function (accounts) {
         expect(maxAwardablePerPeriod).to.equal(100)
     })
     it('check virtue', async () => {
-        let virtue = parseInt(await vDAO.getVirtue(alice, 0))
+        let virtue = parseInt(await vDAO.getVirtue(alice))
         expect(virtue).to.equal(0)
     })
 
     it('issue virtue', async () => {
-        await vDAO.awardVirtue(bob, 0, 100, {
+        await vDAO.awardVirtue(bob, 100, {
             from: alice
         })
-        let virtue = (await vDAO.getVirtue(bob, 0)).toNumber()
+        let virtue = (await vDAO.getVirtue(bob)).toNumber()
         expect(virtue).to.equal(100)
     })
 
     it('check amount awardable this period', async () => {
         let awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
         expect(awardable).to.equal(100)
-        await vDAO.awardVirtue(bob, 0, 100, {
+        await vDAO.awardVirtue(bob, 100, {
             from: alice
         })
     })
     
     it('can only award virtue up to the amount awardable this period', async () => {
-        await vDAO.awardVirtue(bob, 0, 100, {
+        await vDAO.awardVirtue(bob, 100, {
             from: alice
         })
         let remainingAwardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
         expect(remainingAwardable).to.equal(0)
 
-        await truffleAssert.reverts(vDAO.awardVirtue(bob, 1, 100, {
+        await truffleAssert.reverts(vDAO.awardVirtue(bob, 100, {
             from: alice
         }), "Error: not enough virtue to award")
 
@@ -75,7 +75,7 @@ contract("Access control tests", function (accounts) {
     })
 
     it('get new tokens to award each week', async () => {
-        await vDAO.awardVirtue(bob, 0, 100, {
+        await vDAO.awardVirtue(bob, 100, {
             from: alice
         })
         let awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
@@ -84,7 +84,7 @@ contract("Access control tests", function (accounts) {
         advanceTime(secondsPerWeek)
         awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
         expect(awardable).to.equal(100)
-        await vDAO.awardVirtue(bob, 0, 100, {
+        await vDAO.awardVirtue(bob, 100, {
             from: alice
         })
         awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
@@ -94,7 +94,7 @@ contract("Access control tests", function (accounts) {
         advanceTime(secondsPerWeek)
         awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
         expect(awardable).to.equal(100)
-        await vDAO.awardVirtue(bob, 0, 100, {
+        await vDAO.awardVirtue(bob, 100, {
             from: alice
         })
         awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
@@ -104,21 +104,21 @@ contract("Access control tests", function (accounts) {
 
     it('virtue decays each period', async () => {
         expect((await vDAO.virtueDecayPercent()).toNumber()).to.equal(15)
-        await vDAO.awardVirtue(bob, 0, 100, {
+        await vDAO.awardVirtue(bob, 100, {
             from: alice
         })
-        expect((await vDAO.getVirtue(bob, 0)).toNumber()).to.equal(100)
+        expect((await vDAO.getVirtue(bob)).toNumber()).to.equal(100)
 
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue(bob)
-        expect((await vDAO.getVirtue(bob, 0)).toNumber()).to.equal(85)
+        expect((await vDAO.getVirtue(bob)).toNumber()).to.equal(85)
 
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue(bob)
-        expect((await vDAO.getVirtue(bob, 0)).toNumber()).to.equal(72)
+        expect((await vDAO.getVirtue(bob)).toNumber()).to.equal(72)
 
         advanceTime(secondsPerWeek)
         await vDAO.decayVirtue(bob)
-        expect((await vDAO.getVirtue(bob, 0)).toNumber()).to.equal(61)
+        expect((await vDAO.getVirtue(bob)).toNumber()).to.equal(61)
     })
 })

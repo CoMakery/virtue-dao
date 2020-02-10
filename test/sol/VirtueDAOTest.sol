@@ -11,9 +11,8 @@ contract VirtueDAOTest {
         virtueDAO = VirtueDAO(DeployedAddresses.VirtueDAO());
     }
 
-    function testCheckingVirtues() public {
-        uint virtueType = 0;
+    function testCheckingVirtue() public {
         uint nada = 0;
-        Assert.equal(virtueDAO.getVirtue(msg.sender, virtueType), nada, "should start with no endowment");
+        Assert.equal(virtueDAO.getVirtue(msg.sender), nada, "should start with no endowment");
     }
 }
