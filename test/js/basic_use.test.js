@@ -101,4 +101,24 @@ contract("Access control tests", function (accounts) {
         expect(awardable).to.equal(0)
         advanceTime(secondsPerWeek)
     })
+
+    it('virtue decays each period', async () => {
+        expect((await vDAO.virtueDecayPercent()).toNumber()).to.equal(15)
+        await vDAO.awardVirtue(bob, 0, 100, {
+            from: alice
+        })
+        expect((await vDAO.getVirtue(bob, 0)).toNumber()).to.equal(100)
+
+        advanceTime(secondsPerWeek)
+        await vDAO.decayVirtue(bob)
+        expect((await vDAO.getVirtue(bob, 0)).toNumber()).to.equal(85)
+
+        advanceTime(secondsPerWeek)
+        await vDAO.decayVirtue(bob)
+        expect((await vDAO.getVirtue(bob, 0)).toNumber()).to.equal(72)
+
+        advanceTime(secondsPerWeek)
+        await vDAO.decayVirtue(bob)
+        expect((await vDAO.getVirtue(bob, 0)).toNumber()).to.equal(61)
+    })
 })

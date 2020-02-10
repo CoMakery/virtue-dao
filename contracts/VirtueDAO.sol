@@ -10,6 +10,7 @@ contract VirtueDAO {
     // point awards
     uint public maxVirtueId = 4; // zero indexed
     uint public maxAwardablePerPeriod = 100;
+    uint public virtueRetainedPercent = 85;
 
     function getAwardsMadeThisPeriod(address _ally) public view returns (uint) {
         return awardsMadeThisPeriod[currentPeriod()][_ally];
@@ -37,11 +38,18 @@ contract VirtueDAO {
         return now / 604800; // week number since the unix epoch
     }
 
+    function decayVirtue(address _ally) public {
+        uint _virtueId = 0;
+        allyVirtues[_ally][_virtueId] = allyVirtues[_ally][_virtueId].mul(virtueRetainedPercent).div(100);
+    }
+
+    function virtueDecayPercent() public view returns (uint) {
+        return 100 - virtueRetainedPercent;
+    }
+
     // TODO: virtue CAP / max dividend 
     // TODO: these functions
     
-    // function nextPeriod()
-
     // function decayVirtue()
 
     // // Virtue -> rDAI: transferFrom(daoAddress, daoAllyAddress, amount)
