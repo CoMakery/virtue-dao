@@ -1,5 +1,6 @@
 pragma solidity ^0.5.8;
 import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/math/Math.sol";
 import "@openzeppelin/contracts/GSN/Context.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
@@ -46,16 +47,18 @@ contract VirtueDAO is Context, IERC20 {
     // founders get greater of founderMinAwardable or 1/5 virtue
     // non one can exceed the max amount
     function maxAwardableThisPeriod(address _ally) public view returns (uint) {
+        uint virtueAllocation = allyVirtues[_ally] / nonFounderAwardableDivisor;
         if(isFounder[_ally]) {
-            return founderMinAwardable;
+            return Math.max(founderMinAwardable, virtueAllocation);
         } else {
-            return allyVirtues[_ally] / nonFounderAwardableDivisor;
+            return virtueAllocation;
         }
     }
 
     // award virtue to a virtuous ally
     // virtue is awardable each period
     // TODO: find a way to decay without looping over allies each period
+    // TODO: should not spent virtue go to you? Reason is that its easy to create impersonated accounts to award yourself anyway.
     function transfer(address _ally, uint amount) external returns (bool) {
         require((awardsMadeThisPeriod[(currentPeriod())][msg.sender] + amount) <= maxAwardableThisPeriod(msg.sender),
          "Error: not enough virtue to award");
@@ -78,7 +81,6 @@ contract VirtueDAO is Context, IERC20 {
     function currentPeriod() public view returns (uint) {
         return now / 604800; // week number since the unix epoch
     }
-
 
     function decayVirtue() public {
         if(lastPeriodDecayed < currentPeriod()) {

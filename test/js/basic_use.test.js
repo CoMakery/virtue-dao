@@ -199,6 +199,18 @@ contract("Access control tests", function (accounts) {
         expect(awardable).to.equal(founderMinAwardable)
     })
 
+    it('founders can get more than the min founder award if their virtue is higher', async () => {
+        for(let i=0; i < 6; i++) {
+            await vDAO.transfer(alice, 100, {
+                from: bob
+            })
+            advanceTime(secondsPerWeek)
+        }
+
+        let awardable = (await vDAO.getRemainingAwardableThisPeriod(alice)).toNumber()
+        expect(awardable).to.equal(120)
+    })
+
     it('non founders start out with an amount awardable equal to 0', async () => {
         let awardable = (await vDAO.getRemainingAwardableThisPeriod(nonFounder)).toNumber()
         expect(awardable).to.equal(0)
