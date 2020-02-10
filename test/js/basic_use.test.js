@@ -121,4 +121,19 @@ contract("Access control tests", function (accounts) {
         await vDAO.decayVirtue(bob)
         expect((await vDAO.balanceOf(bob)).toNumber()).to.equal(61)
     })
+
+    it('awarding virtue increases the totalSupply of virtue', async () => {
+        expect((await vDAO.totalSupply()).toNumber()).to.equal(0)
+
+        await vDAO.transfer(bob, 75, {
+            from: alice
+        })
+
+        expect((await vDAO.totalSupply()).toNumber()).to.equal(75)
+        
+        await vDAO.transfer(alice, 80, {
+            from: bob
+        })
+        expect((await vDAO.totalSupply()).toNumber()).to.equal(155)
+    })
 })

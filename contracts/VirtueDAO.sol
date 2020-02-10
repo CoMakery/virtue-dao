@@ -9,6 +9,7 @@ contract VirtueDAO is Context, IERC20 {
     string public symbol = "VDAOA";
     string public name = "Virtue DAO Alpha";
     uint8 public decimals = 0;
+    uint _totalSupply = 0;
 
     mapping(address => uint) public allyVirtues; // allyAddress => pointBalance
     mapping(uint => mapping(address => uint)) public awardsMadeThisPeriod; // periodId => user => awardsMadeThisPeriod
@@ -31,6 +32,7 @@ contract VirtueDAO is Context, IERC20 {
         require(awardsMadeThisPeriod[(currentPeriod())][msg.sender] < amount, "Error: not enough virtue to award");
         awardsMadeThisPeriod[(currentPeriod())][msg.sender] = awardsMadeThisPeriod[(currentPeriod())][msg.sender].add(amount);
         allyVirtues[_ally] = allyVirtues[_ally].add(amount);
+        _totalSupply = _totalSupply.add(amount);
         return true;
     }
 
@@ -51,7 +53,7 @@ contract VirtueDAO is Context, IERC20 {
     }
 
     function totalSupply() external view returns (uint256) {
-        return 0;
+        return _totalSupply;
     }
 
     // remains for ERC20 compatibility not used
