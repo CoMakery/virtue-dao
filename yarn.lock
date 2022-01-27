@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@openzeppelin/contracts@^2.5.0":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-2.5.1.tgz#c76e3fc57aa224da3718ec351812a4251289db31"
+  integrity sha512-qIy6tLx8rtybEsIOAlrM4J/85s2q2nPkDqj/Rx46VakBZ0LwtFhXIVub96LXHczQX0vaqmAueDqNPXtbSXSaYQ==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -495,8 +500,9 @@ cacheable-request@^6.0.0:
     responselike "^1.0.2"
 
 cached-path-relative@^1.0.0, cached-path-relative@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/cached-path-relative/-/cached-path-relative-1.0.2.tgz#a13df4196d26776220cc3356eb147a52dba2c6db"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/cached-path-relative/-/cached-path-relative-1.1.0.tgz#865576dfef39c0d6a7defde794d078f5308e3ef3"
+  integrity sha512-WF0LihfemtesFcJgO7xfOoOcnWzY/QHR4qeDqV44jPU3HTI54+LnfXK3SA27AVVGCdZFgjjFFaqUA9Jx7dMJZA==
 
 camelcase@^4.0.0:
   version "4.1.0"
